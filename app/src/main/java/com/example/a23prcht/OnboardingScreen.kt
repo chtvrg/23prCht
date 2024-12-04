@@ -25,7 +25,7 @@ import androidx.navigation.NavController
 fun OnboardingPager(navController: NavController) {
     val pagerState = rememberPagerState()
 
-    // Data for screens
+    
     val pages = listOf(
         OnboardingPage(
             title = "Анализы",
@@ -49,7 +49,7 @@ fun OnboardingPager(navController: NavController) {
             .fillMaxSize()
             .background(Color.White)
     ) {
-        // Pager
+        
         HorizontalPager(
             count = pages.size,
             state = pagerState,
@@ -58,17 +58,17 @@ fun OnboardingPager(navController: NavController) {
             OnboardingScreen(page = pages[page])
         }
 
-        // Indicators
+        
         HorizontalPagerIndicator(
             pagerState = pagerState,
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
                 .padding(16.dp),
-            activeColor = Color(0xFF4CAF50), // Green for active indicator
+            activeColor = Color(0xFF4CAF50), 
             inactiveColor = Color.Gray
         )
 
-        // Skip or Finish button
+        
         TextButton(
             onClick = {
                 if (pagerState.currentPage == pages.lastIndex) {
@@ -95,15 +95,15 @@ fun OnboardingScreen(page: OnboardingPage) {
         verticalArrangement = Arrangement.Center,
         modifier = Modifier.fillMaxSize()
     ) {
-        // Icon or Image
+        
         Image(
             painter = painterResource(id = page.imageRes),
             contentDescription = null,
-            modifier = Modifier.size(200.dp) // Adjust size
+            modifier = Modifier.size(200.dp) 
         )
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Title
+        
         Text(
             text = page.title,
             style = MaterialTheme.typography.titleLarge,
@@ -112,7 +112,7 @@ fun OnboardingScreen(page: OnboardingPage) {
         )
         Spacer(modifier = Modifier.height(8.dp))
 
-        // Description
+        
         Text(
             text = page.description,
             style = MaterialTheme.typography.bodyMedium,
@@ -123,7 +123,7 @@ fun OnboardingScreen(page: OnboardingPage) {
     }
 }
 
-// Data class for each page
+
 data class OnboardingPage(
     val title: String,
     val description: String,
