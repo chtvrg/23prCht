@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 
 @Composable
 fun RegistrationScreen() {
-    // Просто выводим текст "Экран регистрации"
+    
     Text(text = "Экран регистрации")
 }
 
