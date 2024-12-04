@@ -25,7 +25,7 @@ import androidx.navigation.NavController
 fun OnboardingPager(navController: NavController) {
     val pagerState = rememberPagerState()
 
-    
+    // Data for screens
     val pages = listOf(
         OnboardingPage(
             title = "Анализы",
@@ -44,45 +44,50 @@ fun OnboardingPager(navController: NavController) {
         )
     )
 
-    Column(
+    Box(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
     ) {
-        
-        HorizontalPager(
-            count = pages.size,
-            state = pagerState,
-            modifier = Modifier.weight(1f)
-        ) { page ->
-            OnboardingScreen(page = pages[page])
-        }
 
-        
-        HorizontalPagerIndicator(
-            pagerState = pagerState,
+        Text(
+            text = if (pagerState.currentPage == pages.lastIndex) "Завершить" else "Пропустить",
+            color = Color(0xFF2196F3),
+            fontSize = 16.sp,
             modifier = Modifier
-                .align(Alignment.CenterHorizontally)
-                .padding(16.dp),
-            activeColor = Color(0xFF4CAF50), 
-            inactiveColor = Color.Gray
+                .align(Alignment.TopStart)
+                .padding(25.dp)
+                .clickable {
+                    if (pagerState.currentPage == pages.lastIndex) {
+                        navController.navigate("registration")
+                    } else {
+                        navController.navigate("registration")
+                    }
+                }
         )
 
-        
-        TextButton(
-            onClick = {
-                if (pagerState.currentPage == pages.lastIndex) {
-                    navController.navigate("registration")
-                } else {
-                    navController.navigate("registration")
-                }
-            },
-            modifier = Modifier.align(Alignment.End)
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = 56.dp)
         ) {
-            Text(
-                text = if (pagerState.currentPage == pages.lastIndex) "Завершить" else "Пропустить",
-                color = Color(0xFF4CAF50),
-                fontSize = 16.sp
+
+            HorizontalPager(
+                count = pages.size,
+                state = pagerState,
+                modifier = Modifier.weight(1f)
+            ) { page ->
+                OnboardingScreen(page = pages[page])
+            }
+
+
+            HorizontalPagerIndicator(
+                pagerState = pagerState,
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(30.dp),
+                activeColor = Color(0xFF2196F3),
+                inactiveColor = Color.Gray
             )
         }
     }
@@ -95,15 +100,15 @@ fun OnboardingScreen(page: OnboardingPage) {
         verticalArrangement = Arrangement.Center,
         modifier = Modifier.fillMaxSize()
     ) {
-        
+
         Image(
             painter = painterResource(id = page.imageRes),
             contentDescription = null,
-            modifier = Modifier.size(200.dp) 
+            modifier = Modifier.size(200.dp) // Adjust size
         )
         Spacer(modifier = Modifier.height(24.dp))
 
-        
+
         Text(
             text = page.title,
             style = MaterialTheme.typography.titleLarge,
@@ -112,7 +117,7 @@ fun OnboardingScreen(page: OnboardingPage) {
         )
         Spacer(modifier = Modifier.height(8.dp))
 
-        
+
         Text(
             text = page.description,
             style = MaterialTheme.typography.bodyMedium,
