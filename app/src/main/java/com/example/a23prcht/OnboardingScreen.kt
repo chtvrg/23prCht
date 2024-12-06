@@ -25,7 +25,7 @@ import androidx.navigation.NavController
 fun OnboardingPager(navController: NavController) {
     val pagerState = rememberPagerState()
 
-    // Data for screens
+    
     val pages = listOf(
         OnboardingPage(
             title = "Анализы",
@@ -104,7 +104,7 @@ fun OnboardingScreen(page: OnboardingPage) {
         Image(
             painter = painterResource(id = page.imageRes),
             contentDescription = null,
-            modifier = Modifier.size(200.dp) // Adjust size
+            modifier = Modifier.size(200.dp) 
         )
         Spacer(modifier = Modifier.height(24.dp))
 
